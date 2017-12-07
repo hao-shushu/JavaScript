@@ -1,0 +1,39 @@
+html代码 
+   <ul> 
+   　　<li>香蕉</li> 
+   　　<li>苹果</li> 
+   <li>菠萝</li> 
+   　　<li>猕猴桃</li> 
+   　　<li>芒果</li> 
+   </ul> 
+   方法一: 
+   var itemli = document.getElementsByTagName("li"); 
+   for(var i = 0; i<itemli.length; i++){ 
+   　　　　itemli[i].index = i; //给每个li定义一个属性索引值，赋 
+   　　　　itemli[i].onclick = function(){ 
+   　　　　　　alert("下标索引值为："+this.index+"\n"+"文本内容是："+this.innerHTML); // \n换行 索引值从0开始 
+   　　　　} 
+   } 
+   方法二：（常用） 
+   var itemli = document.getElementsByTagName("li"); 
+   for(var i = 0; i<itemli.length; i++){ 
+   　　　(function(n){ 
+   　　itemli[i].onclick = function(){ 
+   　　　　　　alert("下标索引值为："+n+"\n"+"文本内容是："+itemli[n].innerHTML); // \n换行 索引值从0开始 
+   　　　　　} 
+   　　})(i) 
+   } 
+   或者or： 
+   for(var i = 0; i<itemli.length; i++){ 
+ itemli[i].onclick = function(n){ 
+ 　　　　return function(){ 
+ alert("下标索引值为："+n+"\n"+"文本内容是："+itemli[n].innerHTML); // \n换行 索引值从0开始 
+ } 
+ 　　}(i) 
+ } 
+   方法三：jQuery（更简单） 
+   $("ul li").click(function(){ 
+ var item = $(this).index(); //获取索引下标 也从0开始 
+ var textword = $(this).text(); //文本内容 
+ alert("下标索引值为：" + item +"\n"+ "文本内容是："+textword); // \n换行 
+ }) 
